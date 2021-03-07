@@ -1,6 +1,6 @@
 import 'dart:convert';
-
 import 'package:farmapp_udacoding/models/kamus_model.dart';
+import 'package:farmapp_udacoding/widgets/constans.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,8 +21,7 @@ class _PageDictionaryTabState extends State<PageDictionaryTab> {
       loading = true;
     });
 
-    final response = await http.get(
-        "https://farmappudacoding.nasihosting.com/udacoding/get_kamus.php");
+    final response = await http.get("$baseUrl" + "/get_kamus.php");
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
