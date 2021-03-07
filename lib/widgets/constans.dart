@@ -6,7 +6,7 @@ const String baseUrl = "https://farmappudacoding.nasihosting.com/udacoding";
 const kGrey1 = Color(0xFF9F9F9F);
 const kGrey2 = Color(0xFF6D6D6D);
 const kGrey3 = Color(0xFFEAEAEA);
-const kOrange = Color(0xFFFFCC88);
+const kOrange = Color(0xFFCB103);
 
 var kNonActiveTabStyle = GoogleFonts.roboto(
   textStyle: TextStyle(fontSize: 14.0, color: kGrey1),

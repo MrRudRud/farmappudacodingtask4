@@ -38,8 +38,9 @@ class Gallery extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             "Farm Gallery",
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(color: kGrey2),
           ),
+          backgroundColor: Colors.white,
           centerTitle: true,
         ),
         body: Center(

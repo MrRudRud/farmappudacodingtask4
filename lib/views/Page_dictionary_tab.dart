@@ -61,13 +61,12 @@ class _PageDictionaryTabState extends State<PageDictionaryTab> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Container(
         child: Column(
           children: [
             Container(
               padding: EdgeInsets.all(10.0),
-              color: Colors.orange,
+              // color: Colors.orange,
               child: Card(
                 child: ListTile(
                   leading: Icon(Icons.search),

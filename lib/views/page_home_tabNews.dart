@@ -97,8 +97,9 @@ class ItemList extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(left: 19.0),
               child: Text(
-                "Berita utama",
-                style: kNonActiveTabStyle,
+                "Berita Utama",
+                style: TextStyle(
+                    fontSize: 17.0, fontWeight: FontWeight.bold, color: kGrey1),
               ),
             ),
           ),
@@ -170,7 +171,8 @@ class ItemList extends StatelessWidget {
               padding: EdgeInsets.only(left: 19.0),
               child: Text(
                 "Berita Populer",
-                style: kNonActiveTabStyle,
+                style: TextStyle(
+                    fontSize: 17.0, fontWeight: FontWeight.bold, color: kGrey1),
               ),
             ),
           ),
