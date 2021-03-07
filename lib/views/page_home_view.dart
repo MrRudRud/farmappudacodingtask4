@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:farmapp_udacoding/views/page_login_view.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import '../bottomNav.dart';
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+class PageHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // brightness: Brightness.dark,
-        primaryColor: Colors.orange[600],
-        accentColor: Colors.orange[600],
+        primaryColor: Colors.orange,
+        accentColor: Colors.orange,
         textTheme: TextTheme(
             headline1: TextStyle(fontSize: 50.0, fontWeight: FontWeight.bold),
             headline2: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             bodyText1: TextStyle(fontSize: 18.0)),
       ),
-      home: PageLogin(),
+      debugShowCheckedModeBanner: false,
+      home: BottomNav(),
     );
   }
 }
