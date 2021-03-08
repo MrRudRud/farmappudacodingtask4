@@ -113,7 +113,7 @@ class _PageDictionaryTabState extends State<PageDictionaryTab> {
                                       ),
                                       onPressed: () {
                                         msg = b.isi;
-                                        msg = b.judul;
+                                        title = b.judul;
                                         _showDialog(msg, title);
                                       },
                                     ),
@@ -163,16 +163,19 @@ class _PageDictionaryTabState extends State<PageDictionaryTab> {
     slideDialog.showSlideDialog(
       context: context,
       child: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(20),
         child: Column(
           children: [
             Text(
               title,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            SizedBox(
+              height: 10.0,
+            ),
             Text(
               msg,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 17),
             ),
           ],
         ),
