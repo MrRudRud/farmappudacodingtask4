@@ -3,6 +3,7 @@ import 'package:farmapp_udacoding/models/kamus_model.dart';
 import 'package:farmapp_udacoding/widgets/constans.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:slide_popup_dialog/slide_popup_dialog.dart' as slideDialog;
 
 class PageDictionaryTab extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _PageDictionaryTabState extends State<PageDictionaryTab> {
   // Model
   List<Posts> _list = [];
   List<Posts> _search = [];
-
+  String msg = "", title = "";
   var loading = false;
 
   Future<Null> fetchData() async {
@@ -99,17 +100,23 @@ class _PageDictionaryTabState extends State<PageDictionaryTab> {
                             itemBuilder: (context, i) {
                               final b = _search[i];
                               return Container(
-                                padding: EdgeInsets.all(10.0),
+                                padding: EdgeInsets.symmetric(horizontal: 20.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      b.judul,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                    MaterialButton(
+                                      child: Text(
+                                        b.judul,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25.0),
+                                      ),
+                                      onPressed: () {
+                                        msg = b.isi;
+                                        msg = b.judul;
+                                        _showDialog(msg, title);
+                                      },
                                     ),
-                                    SizedBox(height: 4.0),
-                                    Text(b.isi),
                                   ],
                                 ),
                               );
@@ -120,17 +127,26 @@ class _PageDictionaryTabState extends State<PageDictionaryTab> {
                             itemBuilder: (content, i) {
                               final a = _list[i];
                               return Container(
-                                padding: EdgeInsets.all(10.0),
+                                padding: EdgeInsets.symmetric(horizontal: 20.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      a.judul,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(height: 4.0),
-                                    Text(a.isi),
+                                    MaterialButton(
+                                      child: Text(
+                                        a.judul,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 25.0),
+                                      ),
+                                      onPressed: () {
+                                        msg = a.isi;
+                                        title = a.judul;
+                                        _showDialog(msg, title);
+                                      },
+                                    )
+
+                                    // SizedBox(height: 4.0),
+                                    // Text(a.isi),
                                   ],
                                 ),
                               );
@@ -140,6 +156,30 @@ class _PageDictionaryTabState extends State<PageDictionaryTab> {
           ],
         ),
       ),
+    );
+  }
+
+  _showDialog(msg, title) {
+    slideDialog.showSlideDialog(
+      context: context,
+      child: Container(
+        padding: EdgeInsets.all(15),
+        child: Column(
+          children: [
+            Text(
+              title,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              msg,
+              style: TextStyle(fontSize: 20),
+            ),
+          ],
+        ),
+      ),
+      barrierColor: Colors.white.withOpacity(0.7),
+      pillColor: Colors.red,
+      backgroundColor: kGrey3,
     );
   }
 }
