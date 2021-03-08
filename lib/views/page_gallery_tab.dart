@@ -1,7 +1,8 @@
+// import 'package:farmapp_udacoding/views/page_galerry_detail.dart';
+import 'package:farmapp_udacoding/widgets/constans.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:farmapp_udacoding/widgets/constans.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -49,27 +50,103 @@ class Gallery extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return GridView.builder(
+                  shrinkWrap: true,
                   itemCount: snapshot.data.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Container(
-                        decoration: new BoxDecoration(
-                          image: new DecorationImage(
-                              image: new NetworkImage("$baseUrl" +
-                                  "/galery/" +
-                                  snapshot.data[index]['namafile']),
-                              fit: BoxFit.cover),
-                        ),
-                      ),
+                  itemBuilder: (BuildContext context, index) {
+                    var list = snapshot.data;
+                    return FeatureImage(
+                      judul: list[index]['judul'],
+                      desc: list[index]['descripsi'],
+                      fileName: list[index]['namafile'],
+                      index: index,
                     );
                   },
                 );
               }
               return Center(child: CircularProgressIndicator());
             },
+          ),
+        ));
+  }
+}
+
+class FeatureImage extends StatelessWidget {
+  final String judul;
+  final String desc;
+  final String fileName;
+  final int index;
+
+  const FeatureImage(
+      {Key key, this.judul, this.desc, this.fileName, this.index})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Hero(
+        tag: index,
+        child: Material(
+            child: InkWell(
+          onTap: () {
+            print(judul);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GalleryDetail(
+                  gallery: FeatureImage(
+                    judul: judul,
+                    desc: desc,
+                    fileName: fileName,
+                  ),
+                ),
+              ),
+            );
+          },
+          child: GridTile(
+            footer: SafeArea(
+              child: Center(
+                child: Text(
+                  judul,
+                  style: TextStyle(fontWeight: FontWeight.bold, color: kGrey3),
+                ),
+              ),
+            ),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage("$baseUrl" + "/galery/" + fileName),
+                    fit: BoxFit.cover),
+              ),
+            ),
+          ),
+        )),
+      ),
+    );
+  }
+}
+
+class GalleryDetail extends StatelessWidget {
+  final FeatureImage gallery;
+
+  const GalleryDetail({Key key, this.gallery}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('${gallery.judul}'),
+          backgroundColor: Colors.white,
+        ),
+        body: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text('${gallery.desc}'),
+              ],
+            ),
           ),
         ));
   }
