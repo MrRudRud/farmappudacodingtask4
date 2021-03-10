@@ -6,7 +6,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:farmapp_udacoding/views/page_login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:giffy_dialog/giffy_dialog.dart';
 
 class PageHomeTabNews extends StatefulWidget {
   @override
@@ -62,22 +61,7 @@ class _PageHomeTabNewsState extends State<PageHomeTabNews> {
               Icons.exit_to_app,
             ),
             onPressed: () {
-              showDialog(
-                context: context,
-                builder: (_) => AssetGiffyDialog(
-                  image: Image.asset('assets/eevee.png'),
-                  title: Text(
-                    'Logout Confirmation',
-                    style:
-                        TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
-                  ),
-                  entryAnimation: EntryAnimation.TOP_RIGHT,
-                  onOkButtonPressed: () {
-                    signOut();
-                  },
-                  buttonOkColor: Theme.of(context).accentColor,
-                ),
-              );
+              signOut();
             },
           )
         ],
